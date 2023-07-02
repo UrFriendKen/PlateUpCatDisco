@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WORKSHOP|AnyCPU'">
     <OutputPath>bin\WORKSHOP\</OutputPath>
@@ -120,8 +122,18 @@
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y "$(TargetDir)$(TargetName).dll" "$(TargetDir)..\..\WorkshopFolder\content\" /i</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="packages\Yariazen.PlateUp.ModBuildUtilities.1.10.21\build\Yariazen.PlateUp.ModBuildUtilities.targets" Condition="Exists('packages\Yariazen.PlateUp.ModBuildUtilities.1.10.21\build\Yariazen.PlateUp.ModBuildUtilities.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Yariazen.PlateUp.ModBuildUtilities.1.10.21\build\Yariazen.PlateUp.ModBuildUtilities.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Yariazen.PlateUp.ModBuildUtilities.1.10.21\build\Yariazen.PlateUp.ModBuildUtilities.targets'))" />
+  </Target>
 </Project>

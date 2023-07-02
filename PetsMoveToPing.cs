@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace KitchenCatDisco
 {
-    public class PetsMoveToPing : FranchiseSystem
+    public class PetsMoveToPing : FranchiseSystem, IModSystem
     {
         private const float CAT_DISCO_COOLDOWN = 1f;
         private const float CAT_DISCO_EFFECT_SQRDISTANCE = 9f;
